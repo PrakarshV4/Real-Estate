@@ -1,0 +1,30 @@
+1. Bcryptjs : Used for hashing the password that is stored inside the mongoDb.
+   npm i bcryptjs 
+   import bcryptjs from 'bycryptjs'
+   const hashPassword = bcryptjs.hashSync(password , 10)   //10 is the salt length 
+
+2. Controllers : A controller is a function you write to control your data.
+    export const signup = function(req,res){
+        //logic
+    }
+    This is then imported into the signup route
+
+3. express.Router() : The express.Router() function is used to create a new router object. This function is used when you want to create a new router object in your program to handle requests. 
+    const router = express.Router();
+    router.post('/signup', signup)
+    export default router;
+ Now import the router in the index.js file by: 
+    app.use('/api/auth', authRouter)
+
+4. .env : Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env
+    npm i dotenv;
+    keep mongoose connect string insie .env file : MONGOOS = "..."
+    import dotenv from 'dotenv';
+    dotenv.config();
+    mongoose.connect(process.env.MONGO)
+
+5. timestamps : In user.Model while creating userSchema we can save time of creation and time of updation in the DB by:
+    const userSchema =new mongoose.Schema(
+            {username: "String", password: "String",email: "String"},
+            {timestamps: true}
+        )
