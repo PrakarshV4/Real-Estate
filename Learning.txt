@@ -31,3 +31,14 @@
 
 6. e.preventDefault() 
     -It is used to prevent refreshing the page when submiting the form
+
+7. proxy: to get response from backend server we cant directly write fetch('/api/auth/signup') as it will look it in localhost:5173 ,i.e, client so we need to create a proxy by:
+    - Go in vite.config folder then :-
+        server: {
+            proxy:{
+            '/api':{
+                target: 'http://localhost:3000/',
+                secure: false,
+            },
+        },
+    },
