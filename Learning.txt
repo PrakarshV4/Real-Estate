@@ -28,3 +28,6 @@
             {username: "String", password: "String",email: "String"},
             {timestamps: true}
         )
+
+6. e.preventDefault() 
+    -It is used to prevent refreshing the page when submiting the form
