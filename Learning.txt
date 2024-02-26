@@ -2,6 +2,7 @@
    npm i bcryptjs 
    import bcryptjs from 'bycryptjs'
    const hashPassword = bcryptjs.hashSync(password , 10)   //10 is the salt length 
+   const validPassword = bcryptjs.compareSync(password,validUser.password)
 
 2. Controllers : A controller is a function you write to control your data.
     export const signup = function(req,res){
@@ -42,3 +43,6 @@
             },
         },
     },
+
+8. cookie :
+    
