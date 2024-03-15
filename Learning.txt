@@ -48,3 +48,80 @@
     res.cookie('access_token',token,{httpOnly:true})
             .status(200)
             .json(rest);  // sending user data without the password
+
+9. Redux tool kit
+Step 1: Create a store called store.js 
+    import { configureStore } from '@reduxjs/toolkit'
+    export const store = configureStore({
+        reducer: {
+            // add all reducers here 
+        },
+        middleware:(getDefaultMiddleware)=> getDefaultMiddleware({
+            serializableCheck: false, 
+        }) 
+    })
+    // we add middleware here so that we will not get an error for not serializing our variables here
+
+Step 2: Provide the redux store to react 
+    import {store} from './redux/store.js';
+    import { Provider } from 'react-redux'; 
+    ReactDOM.createRoot(document.getElementById('root')).render(
+        <Provider store={store}>
+            <App />
+        </Provider>,
+    )
+
+Step 3: Create a redux state slice userSlice.js
+    import {createSlice} from '@reduxjs/toolkit';
+
+    const initialState = {
+        currentUser: null,
+        error: null,
+        loading: false,
+    }
+    const UserSlice = createSlice({
+        name: 'user',
+        initialState,
+        reducers: {
+            signInStart:(state) => {
+                state.loading = true;
+            },
+            signInsuccess:(state,action) => {
+                state.currentUser = action.payload;
+                state.loading = false;
+                state.error = null;
+            },
+            signInFailure:(state,action) => {
+                state.error = action.payload;
+                state.loading = false;
+            }
+        }
+    });
+
+    export const { signInFailure, signInSuccess, signInStart } = userSlice.actions;
+
+    export default userSlice.reducer;
+
+Step 4: Add slice to store:
+    import { configureStore } from '@reduxjs/toolkit'
+    import  useReducer  from './userSlice'
+
+    export const store = configureStore({
+        reducer: {
+            user: useReducer
+        },
+        middleware:(getDefaultMiddleware)=> getDefaultMiddleware({
+            serializableCheck: false,
+        }) 
+    })
+
+Step 5: dispatch these function
+    import {useDispatch, useSelector} from 'react-redux'
+    import { signInStart,signInSuccess,signInFailure } from '../redux/userSlice';
+
+    const { loading,error } = useSelector((state)=> state.user)
+    const dispatch = useDispatch();
+    
+    //use like this
+    dispatch(signInStart());
+    dispatch(signInFailure(data.message));
