@@ -125,3 +125,5 @@ Step 5: dispatch these function
     //use like this
     dispatch(signInStart());
     dispatch(signInFailure(data.message));
+
+// On refreshing we are loosing the data so we need to it in localStorage of the browser. We don't need to do it ourself we have a package called redux persists
