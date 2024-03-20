@@ -17,6 +17,9 @@ export default function Profile() {
   //     allow write: if
   //     request.resource.size < 2 * 1024 * 1024 && //2 MB
   //     request.resource.contentType.matches('images/.*')
+
+  // adding the image in firebase storage with rule that image must be less than 2MB 
+
   useEffect(()=>{
     if(file){
       handleFileUpload(file);

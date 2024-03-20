@@ -1,5 +1,35 @@
+import User from "../models/user.model.js";
+import { errorHandler } from "../utils/error.js";
+import bycryptjs from 'bcryptjs'
+
 export const test = (req,res)=>{
+    // console.log("req cookies = "+req.cookies)
     res.json({
         msg: "hello world"
     })
+};
+
+export const updateUser = async(req,res,next)=>{
+    if(req.user.id !== req.params.id){
+        return next(errorHandler(401,"You can only update your own account"))
+    }
+    try {
+        if(req.body.password){
+            req.body.password = bycryptjs.hashSync(req.body.password,10)
+        }
+        const updatedUser = await User.findByIdAndUpdate(req.user.id,{
+            $set:{
+                username: req.body.username,
+                email: req.body.email,
+                password: req.body.password,
+                avatar: req.body.avatar
+            }
+        },{ new: true })
+        console.log("updatedUser = " + updatedUser);
+        const {password , ...rest} = updatedUser._doc;
+        res.status(200).json(rest);
+        // res.json({updatedUser: updatedUser})
+    } catch (error) {
+        next(error);
+    }
 }
