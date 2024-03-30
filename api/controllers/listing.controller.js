@@ -77,16 +77,16 @@ export const getListings = async (req, res, next) => {
             parking = { $in: [true,false] };
         }
 
-        const type = req.query.type;
+        let type = req.query.type;
         if(type === undefined || type === 'all'){
             type = {$in: ['sale','rent']};
         }
 
-        const searchTerm = req.query.searchTerm || '';
+        let searchTerm = req.query.searchTerm || '';
 
-        const sort = req.query.sort || 'createdAt';
+        let sort = req.query.sort || 'createdAt';
 
-        const order = req.query.order || 'desc';
+        let order = req.query.order || 'desc';
 
         const listings = await Listing.find({
             name: { $regex: searchTerm , $options: 'i' }, //regx or regular expression is built in search functionality for mongoDb  
