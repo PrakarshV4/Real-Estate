@@ -7,7 +7,6 @@ import listingRouter from './routes/listing.route.js';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import path from 'path';
-import { dir } from 'console';
 
 dotenv.config();
 
@@ -22,9 +21,6 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors());
-app.listen(3000,()=>{
-    console.log('Server listening on port 3000');
-})
 
 app.use('/api/user',userRouter);
 app.use('/api/auth', authRouter)
@@ -43,4 +39,7 @@ app.use((err,req,res,next)=>{
         statusCode,
         message,
     })
+})
+app.listen(3000,()=>{
+    console.log('Server listening on port 3000');
 })
