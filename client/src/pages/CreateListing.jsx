@@ -104,18 +104,18 @@ export default function CreateListing() {
             })
         }
         //Beds, Baths, Regular price, discountPrice
-        if(e.target.type === 'text'|| e.target.type === 'textarea'){
+        if(e.target.type === 'number' || e.target.type === 'text'|| e.target.type === 'textarea'){
             setFormData({
                 ...formData,
                 [e.target.id]: e.target.value
             })
         }
-        if(e.target.id === 'bedrooms'|| e.target.id === 'bathrooms'){
-            setFormData({
-                ...formData,
-                [e.target.id]: e.target.value
-            })
-        }
+        // if(e.target.id === 'bedrooms'|| e.target.id === 'bathrooms'){
+        //     setFormData({
+        //         ...formData,
+        //         [e.target.id]: e.target.value
+        //     })
+        // }
     };
     const handleSubmit = async(e) => {
         e.preventDefault();
