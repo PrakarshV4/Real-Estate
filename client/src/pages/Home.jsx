@@ -54,8 +54,8 @@ export default function Home() {
           Find your next <span className='text-slate-500'>perfect</span> <br />
           place with ease
         </h1>
-        <div className="text-gray-400 text-xs sm:text-sm">
-          Sahand Esate is the best place to find your perfect place to live
+        <div className="text-gray-400 text-xs sm:text-lg">
+          RealEsate is the best place to find your perfect place to live
           <br />
           We have a wide range of properties for you to choose from.
         </div>
