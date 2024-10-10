@@ -49,7 +49,7 @@
             .status(200)
             .json(rest);  // sending user data without the password
 
-9. Redux tool kit
+9. Redux tool kit for React
 Step 1: Create a store called store.js 
     import { configureStore } from '@reduxjs/toolkit'
     export const store = configureStore({
